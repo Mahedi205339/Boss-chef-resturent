@@ -1,6 +1,7 @@
 
 const MenuItem = ({ item }) => {
     const { name, image, price, recipe } = item
+    
     return (
         <div className="flex space-x-2 my-7">
             <img className="w-32 h-28 rounded-b-full rounded-r-full" src={image} alt="" />
