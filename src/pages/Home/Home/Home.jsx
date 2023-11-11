@@ -8,9 +8,12 @@ const Home = () => {
     return (
         <div>
            <Banner></Banner>
-           <Category></Category>
+           <div className="max-w-7xl mx-auto">
+             <Category></Category>
            <TextBanner></TextBanner>
            <PopularMenu></PopularMenu>
+           </div>
+          
 
         </div>
     );
