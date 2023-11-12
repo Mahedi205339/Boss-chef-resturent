@@ -6,7 +6,7 @@ import MenuItem from "../../Shared/MenuItem/MenuItem";
 
 const PopularMenu = () => {
     const [menu, setMenu] = useState([])
- 
+
 
     useEffect(() => {
         fetch('menu.json')
@@ -14,11 +14,11 @@ const PopularMenu = () => {
             .then(data => {
                 const popularItems = data.filter(item => item.category === 'popular')
                 setMenu(popularItems)
-                
+
 
             })
     }, [])
-  
+
 
     return (
         <section>
@@ -34,6 +34,9 @@ const PopularMenu = () => {
                     ></MenuItem>)
 
                 }
+            </div>
+            <div className="text-center my-4 ">
+                <button className=" bg-black bg-opacity-10 border-b-4 border-black px-4 py-2 rounded-lg hover:bg-black hover:bg-opacity-60 hover:text-white mt-2">View Full Menu</button>
             </div>
 
 
