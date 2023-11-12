@@ -47,7 +47,7 @@ const Category = () => {
                 }}
             >
 
-                <SwiperSlide className='w-96'>
+                <SwiperSlide>
                     <img className='w-full' src={slide1} alt="" />
                     <h3 className='text-4xl uppercase text-center text-white -mt-24'>Salads</h3>
 
