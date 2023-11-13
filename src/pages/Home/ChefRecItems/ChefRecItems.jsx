@@ -13,7 +13,7 @@ const ChefRecItems = ({ item }) => {
                     <p>{recipe}</p>
                     <p className="font-bold absolute mr-4 mt-5 top-0 right-0 text-yellow-600 bg-black px-2 py-1 rounded-tr-3xl rounded-bl-3xl"> $ {price}</p>
                     <div className="card-actions justify-center">
-                        <button className="bg-[#E8E8E8] text-[#BB8506] hover:bg-[#1F2937] px-4 py-2 rounded-lg font-semibold my-2">Buy Now</button>
+                        <button className="bg-[#E8E8E8] text-[#BB8506] hover:bg-[#1F2937] px-4 py-2 rounded-lg font-semibold border-b-4 border-[#BB8506] my-2">Add to Cart</button>
                     </div>
                 </div>
             </div>
