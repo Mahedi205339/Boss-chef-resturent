@@ -1,4 +1,4 @@
-import './login.css'
+import './signUp.css'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import logImg from '../../assets/others/authentication1.png'
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -11,10 +11,12 @@ const Login = () => {
     useEffect(() => {
         loadCaptchaEnginge(6)
     }, [])
-    const handleLogin = event => {
+    const handleSingUp = event => {
         event.preventDefault();
         const form = event.target;
+        
         const email = form.email.value;
+        const name = form.name.value;
         const password = form.password.value;
         console.log(email, password)
         signIn(email , password)
@@ -38,15 +40,23 @@ const Login = () => {
 
 
     return (
-        <div className="login-back hero min-h-screen bg-base-200">
+        <div className="signUp-back hero min-h-screen bg-base-200">
             <div className="hero-content flex flex-col md:flex-row">
                 <div className="text-center md:w-1/2 lg:text-left">
                     <img src={logImg} alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm lg:w-1/2">
-                    <form onSubmit={handleLogin} className="card-body">
+                    <form onSubmit={handleSingUp} className="card-body">
                         <div>
-                            <h2 className='text-center text-2xl md:text-4xl lg:text5xl font-bold text-[#d1a054]'>Login</h2>
+                            <h2 className='text-center text-2xl md:text-4xl lg:text5xl font-bold text-[#d1a054]'>SignUp Now</h2>
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="text" placeholder="name"
+                                name="name"
+                                className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -82,7 +92,7 @@ const Login = () => {
 
                         </div>
                     </form>
-                    <p className='text-center'><small className='text-[#d1a054]'>New Here? <Link to="/signUp"><span className='font-bold'>Create an Account</span></Link></small></p>
+                    <p className='text-center'><small className='text-[#d1a054]'>Already Have an account? <Link to="/login"><span className='font-bold'>Login</span></Link></small></p>
                 </div>
             </div>
         </div>
