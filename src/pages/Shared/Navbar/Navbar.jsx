@@ -10,6 +10,7 @@ const Navbar = () => {
             .catch(error => console.log(error))
 
     }
+    console.log(user?.photoURL)
 
     const navLinks = <>
         <li><Link to="/">Home</Link></li>
@@ -17,8 +18,10 @@ const Navbar = () => {
         <li><Link to="/order/salad">Order Food</Link></li>
 
         {
-            user ?
+            user ? <>
                 <button onClick={handleLogout} className=" py-1 px-2 rounded-lg bg-red-700 text-white"> Logout</button>
+            </>
+
                 :
                 <li><Link to="/login">Login</Link></li>
 
@@ -43,6 +46,10 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                         {navLinks}
                     </ul>
+                </div>
+                <div className="navbar-end flex lg:flex-row gap-3">
+                    <h3 className="text-2xl">{user?.displayName}</h3>
+                    <img className="w-16 p-1" src={user?.photoURL} alt="" />
                 </div>
             </div>
         </>

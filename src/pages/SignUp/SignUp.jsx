@@ -1,24 +1,39 @@
 //import { LoadCanvasTemplate } from 'react-simple-captcha';
 import './signUp.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logImg from '../../assets/others/authentication2.png'
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
     const {
-        register, handleSubmit, formState: { errors },
+        register, handleSubmit, reset, formState: { errors },
     } = useForm()
-    const { createUser } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const navigate =useNavigate();
 
     const onSubmit = (data) => {
-        console.log(data)
+        console.log(data.name, data.PhotoURL)
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
+                updateUserProfile(data.name, data.PhotoURL)
+                    .then(() => {
+                         reset()
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Successfully Signed in",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                       navigate('/')
+                    })
+                    .catch(error => console.log(error))
             })
     }
 
@@ -49,6 +64,16 @@ const SignUp = () => {
                             />
                             {errors.name && <span className='text-red-700 font-bold'>Name is required</span>}
                         </div>
+
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Photo URL</span>
+                            </label>
+                            <input  {...register("PhotoURL", { required: true })} type="text" placeholder="Photo URL"
+                                className="input input-bordered" />
+                            {errors.name && <span className='text-red-700 font-bold'>Email is required</span>}
+                        </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -66,7 +91,7 @@ const SignUp = () => {
                                 required: true,
                                 minLength: 8,
                                 maxLength: 20,
-                                pattern:/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/
+                                pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/
                             })} type="text" placeholder="password"
                                 name="password"
                                 className="input input-bordered" />
