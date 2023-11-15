@@ -3,18 +3,31 @@ import './signUp.css'
 import { Link } from 'react-router-dom';
 import logImg from '../../assets/others/authentication2.png'
 import { useForm } from 'react-hook-form';
+import { Helmet } from 'react-helmet-async';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/AuthProvider';
 
 const SignUp = () => {
     const {
         register, handleSubmit, formState: { errors },
     } = useForm()
+    const { createUser } = useContext(AuthContext);
 
     const onSubmit = (data) => {
         console.log(data)
+        createUser(data.email, data.password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser)
+            })
     }
 
     return (
-        <div className="sign-back hero min-h-screen bg-base-200">
+        <div className="sign-back hero min-h-screen ">
+            <Helmet>
+                <title>Boss Chef | SignUp</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
             <div className="hero-content flex flex-col md:flex-row">
                 <div className="text-center md:w-1/2 lg:text-left">
                     <img src={logImg} alt="" />
@@ -49,10 +62,22 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input  {...register("password", { required: true, minLength: 8, maxLength: 20 })} type="password" placeholder="password"
+                            <input  {...register("password", {
+                                required: true,
+                                minLength: 8,
+                                maxLength: 20,
+                                pattern:/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/
+                            })} type="text" placeholder="password"
                                 name="password"
                                 className="input input-bordered" />
+
                             {errors.name && <span className='text-red-700 font-bold'>Password is required</span>}
+                            {errors.password?.type === 'minLength' && <p className='text-red-600'> Password must be 6 character</p>
+                            }
+                            {errors.password?.type === 'maxLength' && <p className='text-red-600'> Password must be less than 20 character</p>
+                            }
+                            {errors.password?.type === 'pattern' && <p className='text-red-600'> Password must have one uppercase , one lowercase and one number</p>
+                            }
                         </div>
 
                         {/* <div className="form-control">
@@ -66,7 +91,7 @@ const SignUp = () => {
                         </div> */}
 
                         <div className="form-control mt-6">
-                            <input className="w-full bg-[#d1a054] hover:bg-[#9c6535] py-2 rounded-lg text-white" type="submit" />
+                            <input className="w-full bg-[#d1a054] hover:bg-[#9c6535] py-2 rounded-lg text-white" type="submit" value="SignUp" />
 
 
                         </div>

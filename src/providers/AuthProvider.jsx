@@ -10,11 +10,11 @@ const AuthProvider = ({ children }) => {
     const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
-    const singIn = (email, password) => {
+    const signIn = ( email, password) => {
         setLoading(true)
-        return signInWithEmailAndPassword(email, password)
+        return signInWithEmailAndPassword(auth, email, password)
     }
-    const logout = auth => {
+    const logout = () => {
         setLoading(true)
         return signOut(auth)
     }
@@ -28,13 +28,13 @@ const AuthProvider = ({ children }) => {
                 return unsubscribe();
             }
         })
-    }, [auth])
+    }, [])
 
     const authInfo = {
         user,
         loading,
         createUser,
-        singIn,
+        signIn,
         logout,
     }
     return (

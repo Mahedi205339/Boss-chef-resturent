@@ -4,6 +4,8 @@ import logImg from '../../assets/others/authentication1.png'
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
+import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 const Login = () => {
     const captchaRef = useRef(null)
     const [disabled, setDisabled] = useState(true);
@@ -17,11 +19,19 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password)
-        signIn(email , password)
-        .then(result=>{
-            const user = result.user;
-            console.log(user)
-        })
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Successfully Logged in",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+            })
+            .catch(error => console.log(error))
     }
 
     const handleValidateCaptcha = () => {
@@ -39,6 +49,10 @@ const Login = () => {
 
     return (
         <div className="login-back hero min-h-screen bg-base-200">
+            <Helmet>
+                <title>Boss Chef | Login</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
             <div className="hero-content flex flex-col md:flex-row">
                 <div className="text-center md:w-1/2 lg:text-left">
                     <img src={logImg} alt="" />
@@ -73,7 +87,7 @@ const Login = () => {
                             <input ref={captchaRef} type="text" placeholder="type the text above"
                                 name="captcha"
                                 className="input input-bordered" />
-                            <button onClick={handleValidateCaptcha} className='btn btn-xs btn-outline  mt-3'>Validate</button>
+                            <button onBlur={handleValidateCaptcha} className='btn btn-xs btn-outline  mt-3'>Validate</button>
 
                         </div>
                         <div className="form-control mt-6">
