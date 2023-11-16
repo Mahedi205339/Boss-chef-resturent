@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
-
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext)
+    const [cart] = useCart()
     const handleLogout = () => {
         logout()
             .then(() => { })
@@ -16,6 +18,14 @@ const Navbar = () => {
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order Food</Link></li>
+        <li>
+            <Link>
+                {/* <button className="btn"> */}
+                <FaShoppingCart className="text-2xl"></FaShoppingCart>
+                <div className="badge  badge-secondary ">+{cart.length}</div>
+                {/* </button> */}
+            </Link>
+        </li>
 
         {
             user ? <>
@@ -30,7 +40,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className="navbar z-10 fixed bg-black bg-opacity-30 text-white ">
+            <div className="navbar z-10 fixed bg-black bg-opacity-30 w-full lg:w-10/12 mx-auto text-white ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -40,7 +50,11 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">Boss Chef</a>
+                    <div className="flex flex-col items-center">
+                        <h3 className="btn btn-ghost normal-case text-xl">Boss Chef</h3>
+                        <h3 className="text-2xl font-extralight">RESTAURANT</h3>
+                    </div>
+
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -50,6 +64,7 @@ const Navbar = () => {
                 <div className="navbar-end flex lg:flex-row gap-3">
                     <h3 className="text-2xl">{user?.displayName}</h3>
                     <img className="w-16 p-1" src={user?.photoURL} alt="" />
+
                 </div>
             </div>
         </>
