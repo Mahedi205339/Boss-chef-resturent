@@ -52,19 +52,20 @@ const Navbar = () => {
                     </div>
                     <div className="flex flex-col items-center">
                         <h3 className="btn btn-ghost normal-case text-xl">Boss Chef</h3>
-                        <h3 className="text-2xl font-extralight">RESTAURANT</h3>
+                        <h3 className="text-2xl font-base">RESTAURANT</h3>
                     </div>
 
                 </div>
-                <div className="navbar-center hidden lg:flex">
+                <div className="navbar-center right-0 hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {navLinks}
                     </ul>
                 </div>
                 <div className="navbar-end flex lg:flex-row gap-3">
-                    <h3 className="text-2xl">{user?.displayName}</h3>
-                    <img className="w-16 p-1" src={user?.photoURL} alt="" />
 
+
+                    <h3 className="text-2xl">{user?.displayName}</h3>
+                    <img className="w-16 p-1 rounded-full" src={user?.photoURL} alt="" />
                 </div>
             </div>
         </>

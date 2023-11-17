@@ -7,13 +7,16 @@ import { Helmet } from 'react-helmet-async';
 import { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic()
     const {
         register, handleSubmit, reset, formState: { errors },
     } = useForm()
     const { createUser, updateUserProfile } = useContext(AuthContext);
-    const navigate =useNavigate();
+    const navigate = useNavigate();
 
     const onSubmit = (data) => {
         console.log(data.name, data.PhotoURL)
@@ -23,7 +26,18 @@ const SignUp = () => {
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.PhotoURL)
                     .then(() => {
-                         reset()
+                        //create user entry in the database 
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosPublic.post('users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database')
+                                }
+                            })
+                        reset()
                         Swal.fire({
                             position: "center",
                             icon: "success",
@@ -31,7 +45,7 @@ const SignUp = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
-                       navigate('/')
+                        navigate('/')
                     })
                     .catch(error => console.log(error))
             })
@@ -122,6 +136,7 @@ const SignUp = () => {
                         </div>
                     </form>
                     <p className='text-center'><small className='text-[#d1a054]'>Already Have an account? <Link to="/login"><span className='font-bold'>Login</span></Link></small></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
