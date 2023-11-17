@@ -1,47 +1,82 @@
-import { FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart } from "react-icons/fa";
+import { FaBookDead, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import { MdAddReaction, MdMenuBook } from "react-icons/md";
 import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
     const [cart] = useCart()
-    const dasboardLinks = <>
-        <li className="flex flex-row items-center">
-            <NavLink to="/dashboard/useHome">
-                <FaHome></FaHome>
-                User Home</NavLink>
-        </li>
+    //TODO : get isAdmin value from the database
+    const isAdmin = true;
+    const dashBoardLinks = <>
+        {
+            isAdmin ?
+                <>
+                    <li className="flex flex-row items-center">
+                        <NavLink to="/dashboard/adminHome">
+                            <FaHome></FaHome>
+                            Admin Home</NavLink>
+                    </li>
 
 
-        <li className="menu menu-horizontal gap-3" >
-            <NavLink to="/dashboard/cart">
-                <FaShoppingCart></FaShoppingCart>
-                My Cart({cart.length})</NavLink>
-        </li>
+                    <li className="menu menu-horizontal gap-3" >
+                        <NavLink to="/dashboard/addItems">
+                            <FaUtensils></FaUtensils>
+                            Add Items</NavLink>
+                    </li>
+                    <li className="menu menu-horizontal gap-3" >
+                        <NavLink to="/dashboard/manageItems">
+                            <FaList></FaList>
+                            Manage Items</NavLink>
+                    </li>
+                    <li className="menu menu-horizontal gap-3" >
+                        <NavLink to="/dashboard/bookings">
+                            <FaBookDead></FaBookDead>
+                            Manage Bookings</NavLink>
+                    </li>
+                    <li className="menu menu-horizontal gap-3" >
+                        <NavLink to="/dashboard/users">
+                            <FaUser></FaUser>
+                            All Users
+                        </NavLink>
+                    </li>
 
-        <li>
-            <NavLink to="/dashboard/review">
-                <MdAddReaction />
-                Add Review</NavLink>
-
-        </li>
-
-
-
-
-        <li>
-            <NavLink to="/dashboard/reservation">
-                <FaCalendar></FaCalendar>
-                Reservation</NavLink>
-        </li>
+                </> :
+                <>
+                    <li className="flex flex-row items-center">
+                        <NavLink to="/dashboard/useHome">
+                            <FaHome></FaHome>
+                            User Home</NavLink>
+                    </li>
 
 
-        <li>
-            <NavLink to="/dashboard/bookings">
-                <FaList></FaList>
-                My Bookings</NavLink>
-        </li>
-        {/* shared Navlinks  */}
+                    <li className="menu menu-horizontal gap-3" >
+                        <NavLink to="/dashboard/cart">
+                            <FaShoppingCart></FaShoppingCart>
+                            My Cart({cart.length})</NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to="/dashboard/review">
+                            <MdAddReaction />
+                            Add Review</NavLink>
+
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/reservation">
+                            <FaCalendar></FaCalendar>
+                            Reservation</NavLink>
+                    </li>
+
+
+                    <li>
+                        <NavLink to="/dashboard/bookings">
+                            <FaList></FaList>
+                            My Bookings</NavLink>
+                    </li>
+                </>
+        }
+
+        {/* shared NavLinks  */}
         <div className="divider"></div>
 
         <li>
@@ -60,8 +95,6 @@ const Dashboard = () => {
                 Contact
             </NavLink>
         </li>
-
-
     </>
     return (
         <div className="drawer">
@@ -78,7 +111,7 @@ const Dashboard = () => {
                         <ul className="menu menu-horizontal flex items-center gap-3">
                             {/* Navbar menu content here */}
 
-                            {dasboardLinks}
+                            {dashBoardLinks}
                         </ul>
                     </div>
                 </div>
@@ -89,7 +122,7 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200">
                     {/* Sidebar content here */}
-                    {dasboardLinks}
+                    {dashBoardLinks}
                 </ul>
             </div>
         </div>
