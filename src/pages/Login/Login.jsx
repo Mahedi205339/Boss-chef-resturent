@@ -20,6 +20,18 @@ const Login = () => {
     useEffect(() => {
         loadCaptchaEnginge(6)
     }, [])
+
+    const handleValidateCaptcha = () => {
+        const userCaptchaValue = captchaRef.current.value;
+        if (validateCaptcha(userCaptchaValue)) {
+            setDisabled(false)
+        } else {
+            setDisabled(true)
+        }
+
+
+    }
+
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
@@ -42,16 +54,7 @@ const Login = () => {
             .catch(error => console.log(error))
     }
 
-    const handleValidateCaptcha = () => {
-        const userCaptchaValue = captchaRef.current.value;
-        if (validateCaptcha(userCaptchaValue)) {
-            setDisabled(false)
-        } else {
-            setDisabled(true)
-        }
 
-
-    }
 
 
 
