@@ -2,11 +2,12 @@ import { FaBookDead, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaU
 import { NavLink, Outlet } from "react-router-dom";
 import { MdAddReaction, MdMenuBook } from "react-icons/md";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
     const [cart] = useCart()
     //TODO : get isAdmin value from the database
-    const isAdmin = true;
+    const [isAdmin] = useAdmin()
     const dashBoardLinks = <>
         {
             isAdmin ?

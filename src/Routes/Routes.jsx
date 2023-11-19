@@ -40,7 +40,6 @@ const router = createBrowserRouter([
                 path: 'secret',
                 element: <PrivateRoute><Secret></Secret></PrivateRoute>
             }
-
         ]
     },
     {
