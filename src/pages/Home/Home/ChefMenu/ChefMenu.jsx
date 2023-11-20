@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
-import ChefRecItems from "../../ChefRecItems/ChefRecItems";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
+import useMenu from "../../../../hooks/useMenu";
+
+// import { useState } from "react";
+import ChefRecItems from "../../ChefRecItems/ChefRecItems";
 
 const ChefMenu = () => {
-    const [chefRec, setChefRec] = useState([])
-    useEffect(() => {
-        fetch('menu.json')
-            .then(res => res.json())
-            .then(data => {
-
-                const ChefRecItems = data.filter(item => item.category === 'offered')
-                setChefRec(ChefRecItems)
-
-            })
-    }, [])
+   
+    const [menu]=useMenu()
+    // const [chefRec, setChefRec] = useState([])
+                const chefRecommend = menu?.filter(item => item.category === 'offered')
+                //  setChefRec(chefRecommend)
 
     return (
         <div>
@@ -23,9 +19,9 @@ const ChefMenu = () => {
             >
             </SectionTitle>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 p-2">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 p-2">
                 {
-                    chefRec?.map(item => <ChefRecItems
+                    chefRecommend?.map(item => <ChefRecItems
                         item={item}
                         key={item._id}
                     ></ChefRecItems>)

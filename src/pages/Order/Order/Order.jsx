@@ -3,11 +3,11 @@ import orderCover from '../../../assets/shop/banner2.jpg'
 import Cover from '../../Shared/Cover/Cover';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import useMenu from '../../../hooks/useMenu';
 
 import OrderTab from '../OrderTab/OrderTab';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import useMenu from '../../../hooks/useMenu';
 const Order = () => {
 
     const [menu] = useMenu();

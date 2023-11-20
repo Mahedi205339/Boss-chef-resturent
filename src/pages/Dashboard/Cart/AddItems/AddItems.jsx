@@ -2,12 +2,15 @@ import { useForm } from "react-hook-form";
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import { FaUtensils } from "react-icons/fa";
 import useAxiosPublic from "../../../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 //image upload to image bb and then get an url
 const AddItems = () => {
     const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { register, handleSubmit } = useForm()
     const onSubmit = async (data) => {
         console.log(data)
@@ -16,8 +19,30 @@ const AddItems = () => {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
-        })
-        console.log(res.data)
+        });
+        if (res.data.success) {
+            //now send the menu item data to the server with image url
+            const menuItem = {
+                name: data.name,
+                category: data.category,
+                price: parseFloat(data.price),
+                recipe: data.recipe,
+                image: res.data.data.display_url
+            }
+            const menuRes = await axiosSecure.post('/menu',menuItem)
+            console.log(menuRes.data)
+            if(menuRes.data.insertedId){
+                //show success popup
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Successfully Added ",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        }
+        console.log('with image data',res.data)
     }
 
     return (
@@ -45,11 +70,11 @@ const AddItems = () => {
                             <label className="label">
                                 <span className="label-text"> Category*</span>
                             </label>
-                            <select className="select select-bordered w-full " {...register("Category")}>
-                                <option disabled selected >Select a category</option>
+                            <select defaultValue="default" className="select select-bordered w-full " {...register("category")}>
+                                <option value="default" disabled  >Select a category</option>
                                 <option value="salad">Salad</option>
                                 <option value="pizza">Pizza</option>
-                                <option value="desert">Desert</option>
+                                <option value="dessert">Dessert</option>
                                 <option value="soup">Soup</option>
                                 <option value="drinks">Drinks</option>
                             </select>
