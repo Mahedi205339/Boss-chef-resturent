@@ -3,40 +3,13 @@ import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useMenu from "../../../hooks/useMenu";
+import { Link } from "react-router-dom";
 
 
 const ManageItems = () => {
     const [menu, refetch] = useMenu()
     const axiosSecure = useAxiosSecure()
 
-    // const handleDeleteItem = (item) => {
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, delete it!"
-    //     }).then(async (result) => {
-    //         if (result.isConfirmed) {
-
-    //             const res = await axiosSecure.delete(`/menu/${item._id}`)
-    //             console.log(res.data)
-    //                 .then(res => {
-    //                     if (res.data.deletedCount > 0) {
-    //                         refetch()
-    //                         Swal.fire({
-    //                             title: "Deleted!",
-    //                             text: `${item.name} has been deleted.`,
-    //                             icon: "success",
-    //                             timer: 1500
-    //                         });
-    //                     }
-    //                 })
-    //         }
-    //     });
-    // }
 
     const handleDeleteItem = (item) => {
         Swal.fire({
@@ -94,9 +67,11 @@ const ManageItems = () => {
                                     <th><img className="w-20 rounded-xl" src={item.image} alt="" /></th>
                                     <td>{item.name}</td>
                                     <td>
-                                        <button className="">
-                                            <FaEdit className="text-2xl text-[#BB8506] hover:text-3xl"></FaEdit>
-                                        </button>
+                                        <Link to={`/dashboard/updateItem/${item._id}`}>
+                                            <button className="">
+                                                <FaEdit className="text-2xl text-[#BB8506] hover:text-3xl"></FaEdit>
+                                            </button>
+                                        </Link>
                                     </td>
 
                                     <td>

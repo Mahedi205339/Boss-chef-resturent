@@ -15,16 +15,24 @@ const useMenu = () => {
     //         });
     // }, [])
 
-    const {data: menu = [], isPending: loading, refetch} = useQuery({
-        queryKey: ['menu'], 
-        queryFn: async() =>{
-            const res = await axiosPublic.get('/menu');
+    // const {data: menu = [], isPending: loading, refetch} = useQuery({
+    //     queryKey: ['menu'], 
+    //     queryFn: async() =>{
+    //         const res = await axiosPublic.get('/menu');
+    //         return res.data;
+    //     }
+    // })
+    // const axiosSecure = useAxiosSecure()
+    const { data: menu = [], refetch } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/menu' )
             return res.data;
         }
     })
 
 
-    return [menu, loading, refetch]
+    return [menu, refetch]
 }
 
 export default useMenu;
