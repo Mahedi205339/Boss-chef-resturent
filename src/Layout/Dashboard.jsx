@@ -1,6 +1,6 @@
 import { FaBookDead, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { MdAddReaction, MdMenuBook } from "react-icons/md";
+import { MdAddReaction, MdMenuBook ,MdPayment } from "react-icons/md";
 import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
 
@@ -17,8 +17,6 @@ const Dashboard = () => {
                             <FaHome></FaHome>
                             Admin Home</NavLink>
                     </li>
-
-
                     <li className="menu menu-horizontal gap-3" >
                         <NavLink to="/dashboard/addItems">
                             <FaUtensils></FaUtensils>
@@ -41,6 +39,7 @@ const Dashboard = () => {
                         </NavLink>
                     </li>
 
+
                 </> :
                 <>
                     <li className="flex flex-row items-center">
@@ -49,12 +48,6 @@ const Dashboard = () => {
                             User Home</NavLink>
                     </li>
 
-
-                    <li className="menu menu-horizontal gap-3" >
-                        <NavLink to="/dashboard/cart">
-                            <FaShoppingCart></FaShoppingCart>
-                            My Cart({cart.length})</NavLink>
-                    </li>
 
                     <li>
                         <NavLink to="/dashboard/review">
@@ -67,18 +60,29 @@ const Dashboard = () => {
                             <FaCalendar></FaCalendar>
                             Reservation</NavLink>
                     </li>
+                    <li>
+                        <NavLink to="/dashboard/history">
+                            <MdPayment></MdPayment>
+                            Payment</NavLink>
+                    </li>
 
 
                     <li>
-                        <NavLink to="/dashboard/bookings">
+                        <NavLink to="/dashboard/paymentHistory">
                             <FaList></FaList>
-                            My Bookings</NavLink>
+                            Payment History</NavLink>
                     </li>
                 </>
         }
 
         {/* shared NavLinks  */}
         <div className="divider"></div>
+
+        <li className="menu menu-horizontal gap-3" >
+            <NavLink to="/dashboard/cart">
+                <FaShoppingCart></FaShoppingCart>
+                My Cart({cart.length})</NavLink>
+        </li>
 
         <li>
             <NavLink to="/">

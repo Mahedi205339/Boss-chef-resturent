@@ -1,15 +1,18 @@
 import SectionTitle from "../../../../components/SectionTitle/SectionTitle";
 import useMenu from "../../../../hooks/useMenu";
 
-// import { useState } from "react";
+import { useEffect, useState } from "react";
 import ChefRecItems from "../../ChefRecItems/ChefRecItems";
 
 const ChefMenu = () => {
-   
-    const [menu]=useMenu()
-    // const [chefRec, setChefRec] = useState([])
-                const chefRecommend = menu?.filter(item => item.category === 'offered')
-                //  setChefRec(chefRecommend)
+
+    const [menu] = useMenu()
+    const [chefRec, setChefRec] = useState([])
+    useEffect(() => {
+        const chefRecommend = menu?.filter(item => item.category === 'offered')
+        setChefRec(chefRecommend)
+    }, [menu])
+
 
     return (
         <div>
@@ -21,7 +24,7 @@ const ChefMenu = () => {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 p-2">
                 {
-                    chefRecommend?.map(item => <ChefRecItems
+                    chefRec?.map(item => <ChefRecItems
                         item={item}
                         key={item._id}
                     ></ChefRecItems>)

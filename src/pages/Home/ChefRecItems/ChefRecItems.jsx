@@ -10,7 +10,7 @@ const ChefRecItems = ({ item }) => {
     const navigate = useNavigate()
     const location = useLocation()
     const { user } = useAuth()
-    const [, refetch] = useCart()
+    const [ , refetch] = useCart()
     const { name, image, recipe, price, _id } = item
     const handleAddToCart = () => {
         if (user && user.email) {
