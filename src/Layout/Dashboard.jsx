@@ -43,7 +43,7 @@ const Dashboard = () => {
                 </> :
                 <>
                     <li className="flex flex-row items-center">
-                        <NavLink to="/dashboard/useHome">
+                        <NavLink to="/dashboard/userHome">
                             <FaHome></FaHome>
                             User Home</NavLink>
                     </li>

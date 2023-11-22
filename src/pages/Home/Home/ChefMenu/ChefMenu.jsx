@@ -11,7 +11,7 @@ const ChefMenu = () => {
     useEffect(() => {
         const chefRecommend = menu?.filter(item => item.category === 'offered')
         setChefRec(chefRecommend)
-    }, [menu])
+    }, [])
 
 
     return (
