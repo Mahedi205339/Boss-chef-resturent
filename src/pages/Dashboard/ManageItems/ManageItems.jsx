@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useMenu from "../../../hooks/useMenu";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const ManageItems = () => {
@@ -38,6 +39,10 @@ const ManageItems = () => {
     }
     return (
         <div>
+            <Helmet>
+        <title>Boss Chef | Manage Items</title>
+        <link rel="canonical" href="https://www.tacobell.com/" />
+      </Helmet>
             <SectionTitle
                 heading="Manage All Items"
                 subHeading="Hurry Up"

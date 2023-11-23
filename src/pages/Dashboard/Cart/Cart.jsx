@@ -36,6 +36,13 @@ const Cart = () => {
             }
         });
     }
+    if(cart.length == 0){
+        return <>
+        <div className=" flex justify-center h-[90vh] items-center">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl">No Item in Cart</h1>
+        </div>
+        </>
+    }
 
     return (
         <div className="my-10">
@@ -49,6 +56,7 @@ const Cart = () => {
                 }
 
             </div>
+            
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

@@ -18,6 +18,7 @@ import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
 import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
+import AllPayments from "../pages/Dashboard/AllPayments/AllPayments";
 
 const router = createBrowserRouter([
     {
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
             {
                 path: 'updateItem/:id',
                 element: <AdminRoute><UpdateItem></UpdateItem></AdminRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`)
+                loader: ({ params }) => fetch(`https://boss-chef-res-server.vercel.app/menu/${params.id}`)
             },
             {
                 path: 'paymentHistory',
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
             {
                 path:'adminHome',
                 element:<AdminRoute><AdminHome></AdminHome></AdminRoute>
+            },
+            {
+                path:'allPayments',
+                element:<AdminRoute><AllPayments></AllPayments></AdminRoute>
             }
         ]
     }

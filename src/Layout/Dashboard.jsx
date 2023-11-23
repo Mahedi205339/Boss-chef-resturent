@@ -1,8 +1,9 @@
-import { FaBookDead, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
+import { FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUser, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { MdAddReaction, MdMenuBook ,MdPayment } from "react-icons/md";
+import { MdAddReaction, MdMenuBook, MdPayment } from "react-icons/md";
 import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
     const [cart] = useCart()
@@ -28,15 +29,15 @@ const Dashboard = () => {
                             Manage Items</NavLink>
                     </li>
                     <li className="menu menu-horizontal gap-3" >
-                        <NavLink to="/dashboard/bookings">
-                            <FaBookDead></FaBookDead>
-                            Manage Bookings</NavLink>
-                    </li>
-                    <li className="menu menu-horizontal gap-3" >
                         <NavLink to="/dashboard/users">
                             <FaUser></FaUser>
                             All Users
                         </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/allPayments">
+                            <MdPayment></MdPayment>
+                            Payment</NavLink>
                     </li>
 
 
@@ -60,18 +61,8 @@ const Dashboard = () => {
                             <FaCalendar></FaCalendar>
                             Reservation</NavLink>
                     </li>
-                    <li>
-                        <NavLink to="/dashboard/history">
-                            <MdPayment></MdPayment>
-                            Payment</NavLink>
-                    </li>
 
 
-                    <li>
-                        <NavLink to="/dashboard/paymentHistory">
-                            <FaList></FaList>
-                            Payment History</NavLink>
-                    </li>
                 </>
         }
 
@@ -100,9 +91,20 @@ const Dashboard = () => {
                 Contact
             </NavLink>
         </li>
+
+        <li>
+            <NavLink to="/dashboard/paymentHistory">
+                <MdPayment></MdPayment>
+                Payment History</NavLink>
+        </li>
+
     </>
     return (
         <div className="drawer">
+            <Helmet>
+        <title>Boss Chef | Dashboard</title>
+        <link rel="canonical" href="https://www.tacobell.com/" />
+      </Helmet>
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col">
                 {/* Navbar */}

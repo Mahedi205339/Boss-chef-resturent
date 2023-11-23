@@ -126,11 +126,14 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
+            <div className="w-full mx-auto flex justify-center my-7">
+                <button className="btn  btn-primary my-4 px-10 py-1 " type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
             <p className="text-red-600">{error}</p>
             {transactionId && <p className="text-green-600"> Your transaction id: {transactionId}</p>}
+            </div>
+            
         </form>
     );
 };

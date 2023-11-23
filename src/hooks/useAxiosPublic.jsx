@@ -1,6 +1,6 @@
 import axios from "axios";
 const axiosPublic = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://boss-chef-res-server.vercel.app'
 })
 const useAxiosPublic = () => {
     return axiosPublic

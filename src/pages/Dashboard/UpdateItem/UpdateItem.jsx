@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -54,6 +55,10 @@ const UpdateItem = () => {
     
     return (
         <div>
+            <Helmet>
+        <title>Boss Chef | Update Items</title>
+        <link rel="canonical" href="https://www.tacobell.com/" />
+      </Helmet>
             <SectionTitle heading="Update an Item" subHeading="Refresh info"></SectionTitle>
             <div>
                 <form onSubmit={handleSubmit(onSubmit)}>

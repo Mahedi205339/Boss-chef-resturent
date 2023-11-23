@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { FaBox, FaDollarSign, FaList, FaUsers } from "react-icons/fa";
 
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, PieChart, Pie, Legend } from 'recharts';
+import { Helmet } from "react-helmet-async";
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 
@@ -65,6 +66,11 @@ const AdminHome = () => {
 
     return (
         <div className="text-center ">
+
+            <Helmet>
+                <title>Boss Chef |Admin Home</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold my-5 md:my-10'">
 
                 Hi, Welcome
@@ -76,36 +82,36 @@ const AdminHome = () => {
 
             <div className=" grid grid-cols-2 lg:grid-cols-4 gap-3">
 
-                <div className= "flex  gap-4 items-center p-2 justify-center bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg">
+                <div className="flex  gap-4 items-center p-2 justify-center bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg">
                     <div className="text-white">
                         <div className="text-2xl font-semibold">Revenue</div>
                         <div className="font-bold text-3xl text-secondary">${stats.revenue}</div>
                     </div>
                     <FaDollarSign className='text-3xl md:text-4xl lg:text-5xl text-secondary'></FaDollarSign>
                 </div>
-                <div className= "flex items-center  gap-4 p-2 justify-center bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
+                <div className="flex items-center  gap-4 p-2 justify-center bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg">
                     <div className="text-white">
                         <div className="text-2xl font-semibold">Users</div>
                         <div className="font-bold text-3xl text-cyan-300">{stats.users}</div>
                     </div>
                     <FaUsers className='text-3xl md:text-4xl lg:text-5xl text-cyan-300'></FaUsers>
                 </div>
-                <div className= "flex  gap-4 items-center p-2 rounded-lg justify-center bg-gradient-to-r from-purple-500 to-pink-500">
+                <div className="flex  gap-4 items-center p-2 rounded-lg justify-center bg-gradient-to-r from-purple-500 to-pink-500">
                     <div className="text-white">
                         <div className="text-2xl font-semibold">Menu Items</div>
                         <div className="font-bold text-3xl text-white">{stats.menuItems}</div>
                     </div>
                     <FaList className='text-3xl md:text-4xl lg:text-5xl text-white'></FaList>
                 </div>
-                <div className= "flex gap-4 items-center p-2 justify-center bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg">
-        
+                <div className="flex gap-4 items-center p-2 justify-center bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg">
+
                     <div className="text-white">
                         <div className="text-2xl font-semibold">Orders</div>
                         <div className="font-bold text-3xl text-green-500">{stats.orders}</div>
                     </div>
                     <FaBox className='text-3xl md:text-4xl lg:text-5xl text-green-500'></FaBox>
                 </div>
-              
+
 
 
             </div>
@@ -122,7 +128,7 @@ const AdminHome = () => {
                             left: 20,
                             bottom: 5,
                         }}
-                
+
                     >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey="category" />
