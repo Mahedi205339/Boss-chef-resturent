@@ -1,4 +1,4 @@
-//import { LoadCanvasTemplate } from 'react-simple-captcha';
+// import { LoadCanvasTemplate } from 'react-simple-captcha';
 import './signUp.css'
 import { Link, useNavigate } from 'react-router-dom';
 import logImg from '../../assets/others/authentication2.png'
@@ -106,7 +106,7 @@ const SignUp = () => {
                                 minLength: 8,
                                 maxLength: 20,
                                 pattern: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])/
-                            })} type="text" placeholder="password"
+                            })} type="password" placeholder="password"
                                 name="password"
                                 className="input input-bordered" />
 
